@@ -1,6 +1,6 @@
-package service;
+package taa.repository;
 
-import domain.User;
+import taa.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface UserDao extends JpaRepository<Long, User>
+public interface AppointmentRepository extends JpaRepository<Appointment, Long>
 {
-
 }

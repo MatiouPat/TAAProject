@@ -1,4 +1,4 @@
-package domain;
+package taa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +17,11 @@ public class Professional extends User
 
     @OneToOne
     private Account account;
+
+    public Professional()
+    {
+
+    }
 
     public Long getId()
     {

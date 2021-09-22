@@ -1,4 +1,4 @@
-package domain;
+package taa.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,6 +18,11 @@ public class Agenda
 
     @OneToMany
     private Collection<Appointment> appointments;
+
+    public Agenda()
+    {
+
+    }
 
     public Long getId()
     {

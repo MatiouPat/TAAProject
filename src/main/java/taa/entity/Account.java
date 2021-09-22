@@ -1,4 +1,4 @@
-package domain;
+package taa.entity;
 
 import javax.persistence.*;
 
@@ -17,6 +17,11 @@ public class Account
 
     @OneToOne(fetch = FetchType.EAGER)
     private Professional professional;
+
+    public Account()
+    {
+
+    }
 
     public Long getId()
     {

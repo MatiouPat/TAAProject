@@ -1,4 +1,4 @@
-package domain;
+package taa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +19,11 @@ public class User
 
     @ManyToMany
     private Collection<Appointment> appointments;
+
+    public User()
+    {
+
+    }
 
     public Long getId()
     {

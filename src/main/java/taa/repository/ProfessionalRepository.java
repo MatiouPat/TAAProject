@@ -1,6 +1,6 @@
-package service;
+package taa.repository;
 
-import domain.Account;
+import taa.entity.Professional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface AccountDao extends JpaRepository<Long, Account>
+public interface ProfessionalRepository extends JpaRepository<Long, Professional>
 {
 
 }
