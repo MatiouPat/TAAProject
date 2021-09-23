@@ -8,7 +8,9 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface ProfessionalRepository extends JpaRepository<Long, Professional>
+public interface ProfessionalRepository extends JpaRepository<Professional, Long>
 {
+
+
 
 }
