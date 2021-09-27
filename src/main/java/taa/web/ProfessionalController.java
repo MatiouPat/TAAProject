@@ -1,24 +1,26 @@
 package taa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import taa.entity.Appointment;
-import taa.entity.Professional;
+import taa.entity.Professionnal;
 import taa.repository.AppointmentRepository;
-import taa.repository.ProfessionalRepository;
+import taa.repository.ProfessionnalRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Controller
 public class ProfessionalController
 {
 
-    private ProfessionalRepository professionalRepository;
+    private ProfessionnalRepository professionalRepository;
 
     @Autowired
-    public void setAppointmentDao(ProfessionalRepository professionalRepository)
+    public void setAppointmentDao(ProfessionnalRepository professionalRepository)
     {
         this.professionalRepository = professionalRepository;
     }
@@ -27,43 +29,38 @@ public class ProfessionalController
     @ResponseBody
     public String create()
     {
-        String professionalId = "";
+        Professionnal professionnal = new Professionnal();
         try {
-            Professional professional = new Professional();
-            professionalRepository.save(professional);
-            professionalId = String.valueOf(professional.getId());
+            professionalRepository.save(professionnal);
         }catch (Exception e) {
             return "Error creating the professional: " + e.toString();
         }
-        return "Professional successfully created with id = " + professionalId;
+        return "Professional successfully created with id = " + professionnal.getId().toString();
     }
 
     @RequestMapping("/professional/{id}")
     @ResponseBody
-    public String read(@PathVariable String id)
+    public String read(@PathVariable long id)
     {
-        Professional professional = null;
+        Professionnal p = null;
         try {
-            professional = professionalRepository.getById(Long.valueOf(id));
+            p = professionalRepository.getById(id);
         }catch (Exception e) {
             return "Error reading the professional: " + e.toString();
         }
-        return "Professional successfully read " + professional.getFirstname() + professional.getLastname();
+        return "Professional successfully read " + p.getFirstname() + p.getLastname();
     }
 
     @RequestMapping("/professional/delete/{id}")
     @ResponseBody
-    public String delete(@PathVariable String id)
+    public String delete(@PathVariable long id)
     {
-        String professionalId = "";
         try {
-            Professional professional = professionalRepository.getById(Long.valueOf(id));
-            professionalId = String.valueOf(professional.getId());
-            professionalRepository.delete(professional);
+            professionalRepository.deleteById(id);
         }catch (Exception e){
             return "Error deleting the professional: " + e.toString();
         }
-        return "Professional successfully deleted with id = " + professionalId;
+        return "Professional successfully deleted with id = " + id;
     }
 
 }

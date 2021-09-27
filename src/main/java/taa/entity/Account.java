@@ -2,6 +2,7 @@ package taa.entity;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "accounts")
 public class Account
@@ -16,7 +17,7 @@ public class Account
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private Professional professional;
+    private Professionnal professional;
 
     public Account()
     {
@@ -49,11 +50,11 @@ public class Account
         this.password = password;
     }
 
-    public Professional getProfessional() {
+    public Professionnal getProfessional() {
         return professional;
     }
 
-    public void setProfessional(Professional professional) {
+    public void setProfessional(Professionnal professional) {
         this.professional = professional;
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Professional extends User
+public class Professionnal extends User
 {
     @Id
     @GeneratedValue
@@ -18,7 +18,7 @@ public class Professional extends User
     @OneToOne
     private Account account;
 
-    public Professional()
+    public Professionnal()
     {
 
     }
