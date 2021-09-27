@@ -2,6 +2,7 @@ package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
 
+
 @Entity
 @Table(name = "accounts")
 public class Account

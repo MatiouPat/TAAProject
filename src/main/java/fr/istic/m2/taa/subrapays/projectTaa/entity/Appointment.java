@@ -18,7 +18,7 @@ public class Appointment
 
     @ManyToMany
     private Collection<User> users;
- -m
+
     @ManyToOne
     private Professional professional;
 

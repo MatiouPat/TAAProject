@@ -1,9 +1,7 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Professional extends User
@@ -17,6 +15,9 @@ public class Professional extends User
 
     @OneToOne
     private Account account;
+
+    @OneToMany
+    private Collection<Appointment> appointments;
 
     public Professional()
     {

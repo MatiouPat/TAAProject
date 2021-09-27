@@ -4,6 +4,7 @@ import fr.istic.m2.taa.subrapays.projectTaa.entity.Appointment;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,4 +35,9 @@ public class AppointmentController
         return "Appointment succesfully created with id = " + appointmentId;
     }
 
+    
+    @RequestMapping("/delete")
+    public void delete(@PathVariable String id) {
+    	
+    }
 }

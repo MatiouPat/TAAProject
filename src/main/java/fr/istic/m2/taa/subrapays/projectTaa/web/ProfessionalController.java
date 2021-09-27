@@ -3,11 +3,13 @@ package fr.istic.m2.taa.subrapays.projectTaa.web;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Controller
 public class ProfessionalController
 {
 
@@ -23,24 +25,22 @@ public class ProfessionalController
     @ResponseBody
     public String create()
     {
-        String professionalId = "";
+        Professional professional = new Professional();
         try {
-            Professional professional = new Professional();
             professionalRepository.save(professional);
-            professionalId = String.valueOf(professional.getId());
         }catch (Exception e) {
             return "Error creating the professional: " + e.toString();
         }
-        return "Professional successfully created with id = " + professionalId;
+        return "Professional successfully created with id = " + professional.getId().toString();
     }
 
     @RequestMapping("/professional/{id}")
     @ResponseBody
-    public String read(@PathVariable String id)
+    public String read(@PathVariable long id)
     {
         Professional professional = null;
         try {
-            professional = professionalRepository.getById(Long.valueOf(id));
+            professional = professionalRepository.getById(id);
         }catch (Exception e) {
             return "Error reading the professional: " + e.toString();
         }
@@ -56,17 +56,14 @@ public class ProfessionalController
 
     @RequestMapping("/professional/delete/{id}")
     @ResponseBody
-    public String delete(@PathVariable String id)
+    public String delete(@PathVariable long id)
     {
-        String professionalId = "";
         try {
-            Professional professional = professionalRepository.getById(Long.valueOf(id));
-            professionalId = String.valueOf(professional.getId());
-            professionalRepository.delete(professional);
+            professionalRepository.deleteById(id);
         }catch (Exception e){
             return "Error deleting the professional: " + e.toString();
         }
-        return "Professional successfully deleted with id = " + professionalId;
+        return "Professional successfully deleted with id = " + id;
     }
 
 }
