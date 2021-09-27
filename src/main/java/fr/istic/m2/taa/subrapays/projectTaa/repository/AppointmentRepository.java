@@ -1,6 +1,6 @@
-package taa.repository;
+package fr.istic.m2.taa.subrapays.projectTaa.repository;
 
-import taa.entity.Appointment;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

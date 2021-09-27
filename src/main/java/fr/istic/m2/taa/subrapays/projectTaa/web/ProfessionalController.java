@@ -1,13 +1,9 @@
-package taa.web;
+package fr.istic.m2.taa.subrapays.projectTaa.web;
 
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
+import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import taa.entity.Appointment;
-import taa.entity.Professional;
-import taa.repository.AppointmentRepository;
-import taa.repository.ProfessionalRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,6 +45,13 @@ public class ProfessionalController
             return "Error reading the professional: " + e.toString();
         }
         return "Professional successfully read " + professional.getFirstname() + professional.getLastname();
+    }
+
+    @PostMapping("/professional/update/{id}")
+    public String update(@RequestBody Professional professional)
+    {
+
+        return "Professional successfully deleted with id = ";
     }
 
     @RequestMapping("/professional/delete/{id}")

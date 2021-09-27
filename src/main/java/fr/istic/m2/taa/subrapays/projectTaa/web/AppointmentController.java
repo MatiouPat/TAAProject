@@ -1,32 +1,32 @@
-package taa.web;
+package fr.istic.m2.taa.subrapays.projectTaa.web;
 
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Appointment;
+import fr.istic.m2.taa.subrapays.projectTaa.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import taa.entity.Appointment;
-import taa.repository.AppointmentRepository;
 
 @Controller
 public class AppointmentController
 {
 
-    private AppointmentRepository appointmentDao;
+    private AppointmentRepository appointmentRepository;
 
     @Autowired
-    public void setAppointmentDao(AppointmentRepository appointmentDao)
+    public void setAppointmentDao(AppointmentRepository appointmentRepository)
     {
-        this.appointmentDao = appointmentDao;
+        this.appointmentRepository = appointmentRepository;
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/appointment/create")
     @ResponseBody
     public String create()
     {
         String appointmentId = "";
         try {
             Appointment appointment = new Appointment();
-            appointmentDao.save(appointment);
+            appointmentRepository.save(appointment);
             appointmentId = String.valueOf(appointment.getId());
         }catch (Exception e) {
             return "Error creating the appointment: " + e.toString();

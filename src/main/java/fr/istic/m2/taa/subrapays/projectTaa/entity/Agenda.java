@@ -1,4 +1,4 @@
-package taa.entity;
+package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package taa.entity;
+package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,7 +18,7 @@ public class Appointment
 
     @ManyToMany
     private Collection<User> users;
-
+ -m
     @ManyToOne
     private Professional professional;
 
