@@ -25,14 +25,10 @@ public class AgendaController {
 
 
 	@RequestMapping("/agenda")
-	public void getAgenda(@RequestParam String nom, @RequestParam String prenom){
+	public Agenda getAgenda(@RequestParam String nom, @RequestParam String prenom){
 		Agenda a=new Agenda();
 		List<Appointment> l=appointmentRepository.findAll();
-		try {
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		return a;
 		
 	}
 
