@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class Professional extends User
+public class Professionnal extends User
 {
     @Id
     @GeneratedValue
@@ -18,8 +18,11 @@ public class Professional extends User
 
     @OneToMany
     private Collection<Appointment> appointments;
+    
+    private String Job;
 
-    public Professional()
+
+	public Professionnal()
     {
 
     }
@@ -29,7 +32,15 @@ public class Professional extends User
         return id;
     }
 
-    public void setId(Long id)
+    public String getJob() {
+		return Job;
+	}
+
+	public void setJob(String job) {
+		Job = job;
+	}
+
+	public void setId(Long id)
     {
         this.id = id;
     }
@@ -40,13 +51,5 @@ public class Professional extends User
 
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 }

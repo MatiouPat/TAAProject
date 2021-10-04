@@ -20,7 +20,7 @@ public class Appointment
     private Collection<User> users;
 
     @ManyToOne
-    private Professional professional;
+    private Professionnal professionnal;
 
     @ManyToOne
     private Agenda agenda;
@@ -72,12 +72,12 @@ public class Appointment
         this.users = users;
     }
 
-    public Professional getProfessional() {
-        return professional;
+    public Professionnal getProfessionnal() {
+        return professionnal;
     }
 
-    public void setProfessional(Professional professional) {
-        this.professional = professional;
+    public void setProfessionnal(Professionnal professionnal) {
+        this.professionnal = professionnal;
     }
 
     public Agenda getAgenda() {

@@ -17,7 +17,7 @@ public class Account
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private Professional professional;
+    private Professionnal professionnal;
 
     public Account()
     {
@@ -50,11 +50,11 @@ public class Account
         this.password = password;
     }
 
-    public Professional getProfessional() {
-        return professional;
+    public Professionnal getProfessionnal() {
+        return professionnal;
     }
 
-    public void setProfessional(Professional professional) {
-        this.professional = professional;
+    public void setProfessionnal(Professionnal professionnal) {
+        this.professionnal = professionnal;
     }
 }
