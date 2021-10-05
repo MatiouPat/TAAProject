@@ -1,12 +1,10 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class User
 {
     @Id
@@ -19,11 +17,6 @@ public class User
 
     @ManyToMany
     private Collection<Appointment> appointments;
-
-    public User()
-    {
-
-    }
 
     public Long getId()
     {

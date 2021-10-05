@@ -3,11 +3,11 @@ package fr.istic.m2.taa.subrapays.projectTaa.web;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Controller
 public class ProfessionalController
@@ -21,49 +21,55 @@ public class ProfessionalController
         this.professionalRepository = professionalRepository;
     }
 
-    @RequestMapping("/professional/create")
+    @PostMapping(value = "/professional/", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String create()
+    public ResponseEntity<Professional> create(@RequestBody Professional professional)
     {
-        Professional professional = new Professional();
         try {
             professionalRepository.save(professional);
         }catch (Exception e) {
-            return "Error creating the professional: " + e.toString();
         }
-        return "Professional successfully created with id = " + professional.getId().toString();
+        return ResponseEntity.status(HttpStatus.OK).body(professional);
     }
 
-    @RequestMapping("/professional/{id}")
+    @GetMapping(value = "/professional/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String read(@PathVariable long id)
+    public ResponseEntity<Professional> read(@PathVariable long id)
     {
         Professional professional = null;
         try {
             professional = professionalRepository.getById(id);
         }catch (Exception e) {
-            return "Error reading the professional: " + e.toString();
         }
-        return "Professional successfully read " + professional.getFirstname() + professional.getLastname();
+        return ResponseEntity.status(HttpStatus.OK).body(professional);
     }
 
-    @PostMapping("/professional/update/{id}")
-    public String update(@RequestBody Professional professional)
+    @PutMapping(value = "/professional/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Professional> update(@PathVariable long id, @RequestBody Professional professional)
     {
+        Professional professionalUpdated = null;
+        try {
+            professionalUpdated = professionalRepository.getById(id);
+            professionalUpdated.setProfession(professional.getProfession());
+            professionalUpdated.setAgenda(professional.getAgenda());
+            professionalUpdated.setAccount(professional.getAccount());
+            professionalUpdated.setAppointments(professional.getAppointments());
+            professionalUpdated = professionalRepository.save(professionalUpdated);
+        }catch (Exception e) {
 
-        return "Professional successfully deleted with id = ";
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(professionalUpdated);
     }
 
-    @RequestMapping("/professional/delete/{id}")
+    @DeleteMapping(value = "/professional/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String delete(@PathVariable long id)
+    public ResponseEntity<Professional> delete(@PathVariable long id)
     {
         try {
             professionalRepository.deleteById(id);
         }catch (Exception e){
-            return "Error deleting the professional: " + e.toString();
         }
-        return "Professional successfully deleted with id = " + id;
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
 }

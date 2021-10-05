@@ -19,11 +19,6 @@ public class Agenda
     @OneToMany
     private Collection<Appointment> appointments;
 
-    public Agenda()
-    {
-
-    }
-
     public Long getId()
     {
         return id;

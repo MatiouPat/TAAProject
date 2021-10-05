@@ -25,11 +25,6 @@ public class Appointment
     @ManyToOne
     private Agenda agenda;
 
-    public Appointment()
-    {
-
-    }
-
     public Long getId()
     {
         return id;
