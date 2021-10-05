@@ -22,13 +22,23 @@ public class Professional extends User
 
     @OneToMany
     private Collection<Appointment> appointments;
+    
+    private String Job;
 
     public Long getId()
     {
         return id;
     }
 
-    public void setId(Long id)
+    public String getJob() {
+		return Job;
+	}
+
+	public void setJob(String job) {
+		Job = job;
+	}
+
+	public void setId(Long id)
     {
         this.id = id;
     }
@@ -64,4 +74,5 @@ public class Professional extends User
     public void setAppointments(Collection<Appointment> appointments) {
         this.appointments = appointments;
     }
+
 }

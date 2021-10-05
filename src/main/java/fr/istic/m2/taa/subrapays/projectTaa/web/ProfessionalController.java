@@ -28,6 +28,7 @@ public class ProfessionalController
         try {
             professionalRepository.save(professional);
         }catch (Exception e) {
+            throw e;
         }
         return ResponseEntity.status(HttpStatus.OK).body(professional);
     }
@@ -40,6 +41,7 @@ public class ProfessionalController
         try {
             professional = professionalRepository.getById(id);
         }catch (Exception e) {
+            throw e;
         }
         return ResponseEntity.status(HttpStatus.OK).body(professional);
     }
@@ -56,7 +58,7 @@ public class ProfessionalController
             professionalUpdated.setAppointments(professional.getAppointments());
             professionalUpdated = professionalRepository.save(professionalUpdated);
         }catch (Exception e) {
-
+            throw e;
         }
         return ResponseEntity.status(HttpStatus.OK).body(professionalUpdated);
     }
@@ -68,6 +70,7 @@ public class ProfessionalController
         try {
             professionalRepository.deleteById(id);
         }catch (Exception e){
+            throw e;
         }
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }

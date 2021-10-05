@@ -14,7 +14,7 @@ public class Agenda
     private String url;
 
     @OneToOne
-    private Professional professional;
+    private Professional professionnal;
 
     @OneToMany
     private Collection<Appointment> appointments;
@@ -37,12 +37,12 @@ public class Agenda
         this.url = url;
     }
 
-    public Professional getProfessional() {
-        return professional;
+    public Professional getProfessionnal() {
+        return professionnal;
     }
 
-    public void setProfessional(Professional professional) {
-        this.professional = professional;
+    public void setProfessional(Professional professionnal) {
+        this.professionnal = professionnal;
     }
 
     public Collection<Appointment> getAppointments() {

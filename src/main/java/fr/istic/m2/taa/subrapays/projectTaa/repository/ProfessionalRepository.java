@@ -11,6 +11,4 @@ import javax.transaction.Transactional;
 public interface ProfessionalRepository extends JpaRepository<Professional, Long>
 {
 
-
-
 }
