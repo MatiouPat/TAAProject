@@ -16,11 +16,11 @@ public class Appointment
 
     private boolean libre;
 
-    @ManyToMany
-    private Collection<User> users;
+    @ManyToOne
+    private User user;
 
     @ManyToOne
-    private Professional professionnal;
+    private Professionnal professionnal;
 
     @ManyToOne
     private Agenda agenda;
@@ -59,19 +59,11 @@ public class Appointment
         this.libre = libre;
     }
 
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Collection<User> users) {
-        this.users = users;
-    }
-
-    public Professional getProfessionnal() {
+    public Professionnal getProfessionnal() {
         return professionnal;
     }
 
-    public void setProfessionnal(Professional professionnal) {
+    public void setProfessionnal(Professionnal professionnal) {
         this.professionnal = professionnal;
     }
 

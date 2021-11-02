@@ -15,9 +15,6 @@ public class User
 
     private String firstname;
 
-    @ManyToMany
-    private Collection<Appointment> appointments;
-
     public Long getId()
     {
         return id;

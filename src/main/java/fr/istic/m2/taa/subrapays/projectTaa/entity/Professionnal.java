@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class Professional extends User
+public class Professionnal extends User
 {
     @Id
     @GeneratedValue
@@ -23,7 +23,7 @@ public class Professional extends User
     @OneToMany
     private Collection<Appointment> appointments;
     
-    private String Job;
+    private String job;
 
     public Long getId()
     {
@@ -31,11 +31,11 @@ public class Professional extends User
     }
 
     public String getJob() {
-		return Job;
+		return job;
 	}
 
 	public void setJob(String job) {
-		Job = job;
+		job = job;
 	}
 
 	public void setId(Long id)

@@ -12,13 +12,14 @@ public class Account
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    @Column(name="login")
     private String login;
 
+    @Column(name="password")
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER)
-    private Professional professionnal;
+    private Professionnal professionnal;
 
     public Long getId()
     {
@@ -46,11 +47,11 @@ public class Account
         this.password = password;
     }
 
-    public Professional getProfessionnal() {
+    public Professionnal getProfessionnal() {
         return professionnal;
     }
 
-    public void setProfessionnal(Professional professionnal) {
+    public void setProfessionnal(Professionnal professionnal) {
         this.professionnal = professionnal;
     }
 }

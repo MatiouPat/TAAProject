@@ -1,18 +1,17 @@
 package fr.istic.m2.taa.subrapays.projectTaa.web;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Agenda;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Appointment;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AgendaRepository;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AppointmentRepository;
 
-@Controller
+@RestController
+@RequestMapping("/Agenda")
 public class AgendaController {
 
 	private AgendaRepository agendaRepository;
@@ -24,12 +23,18 @@ public class AgendaController {
 	}
 
 
-	@RequestMapping("/agenda")
-	public Agenda getAgenda(@RequestParam String nom, @RequestParam String prenom){
+	@GetMapping(value="/get/{id}")
+	@ResponseBody
+	public Agenda getAgenda(@PathVariable String nom, @PathVariable String prenom){
 		Agenda a=new Agenda();
-		List<Appointment> l=appointmentRepository.findAll();
+		try {
+			Collection<Appointment> c=appointmentRepository.FindAllAppointmentByProfessionnal(prenom, nom);
+			a.setAppointments(c);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return a;
 		
 	}
-
+	
 }

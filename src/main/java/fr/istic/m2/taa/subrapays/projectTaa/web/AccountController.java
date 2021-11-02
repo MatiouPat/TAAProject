@@ -1,15 +1,17 @@
 package fr.istic.m2.taa.subrapays.projectTaa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
-import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Professionnal;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AccountRepository;
 
-@Controller
+@RestController
+@RequestMapping("/Account")
 public class AccountController {
 
 	private AccountRepository accountRepository;
@@ -22,11 +24,11 @@ public class AccountController {
 
 
 
-	@RequestMapping("/create")
-	public void create(@RequestParam String login, @RequestParam String mdp,
-			@RequestParam String nom, @RequestParam String prenom,@RequestParam String job) {
+	@PostMapping(value="/create",produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Account> create(@PathVariable String login, @PathVariable String mdp,
+			@PathVariable String nom, @PathVariable String prenom,@PathVariable String job) {
 		Account a=new Account();
-		Professional p=new Professional();
+		Professionnal p=new Professionnal();
 		try {
 			a.setLogin(login);
 			a.setPassword(mdp);
@@ -36,10 +38,33 @@ public class AccountController {
 			a.setProfessionnal(p);
 			accountRepository.save(a);
 		}catch(Exception e){e.printStackTrace();}
+		return ResponseEntity.status(HttpStatus.OK).body(a);
 	}
 	
-	@RequestMapping("/delete")
-	public void delete(@RequestParam Long id) {
-		accountRepository.deleteById(id);
+	@DeleteMapping(value="/delete/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<Account> delete(@PathVariable Long id) {
+		try {
+			accountRepository.deleteById(id);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
+	
+	@PutMapping(value="/update/{id}")
+	@ResponseBody
+	public ResponseEntity<Account> update(@PathVariable Long id,@PathVariable String Login,@PathVariable String Password){
+		Account a=null;
+		try {
+			a=accountRepository.getById(id);
+			a.setLogin(Login);
+			a.setPassword(Password);
+			accountRepository.save(a);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
 }

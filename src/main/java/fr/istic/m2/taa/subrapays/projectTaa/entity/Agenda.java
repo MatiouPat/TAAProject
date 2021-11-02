@@ -1,4 +1,4 @@
-package fr.istic.m2.taa.subrapays.projectTaa.entity;
+	package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -14,7 +14,7 @@ public class Agenda
     private String url;
 
     @OneToOne
-    private Professional professionnal;
+    private Professionnal professionnal;
 
     @OneToMany
     private Collection<Appointment> appointments;
@@ -37,11 +37,11 @@ public class Agenda
         this.url = url;
     }
 
-    public Professional getProfessionnal() {
+    public Professionnal getProfessionnal() {
         return professionnal;
     }
 
-    public void setProfessional(Professional professionnal) {
+    public void setProfessional(Professionnal professionnal) {
         this.professionnal = professionnal;
     }
 
