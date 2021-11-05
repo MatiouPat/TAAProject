@@ -1,46 +1,45 @@
 package fr.istic.m2.taa.subrapays.projectTaa.web;
 
-import fr.istic.m2.taa.subrapays.projectTaa.entity.Professionnal;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionnalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/Professionnal")
-public class ProfessionnalController
+@RequestMapping("/Professional")
+public class ProfessionalController
 {
 
-    private ProfessionnalRepository professionnalRepository;
+    private ProfessionnalRepository professionalRepository;
 
     @Autowired
-    public void setAppointmentDao(ProfessionnalRepository professionalRepository)
+    public void setProfessionalRepository(ProfessionnalRepository professionalRepository)
     {
-        this.professionnalRepository = professionalRepository;
+        this.professionalRepository = professionalRepository;
     }
 
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Professionnal> create(@RequestBody Professionnal professionnal)
+    public ResponseEntity<Professional> create(@RequestBody Professional professional)
     {
         try {
-            professionnalRepository.save(professionnal);
+            professionalRepository.save(professional);
         }catch (Exception e) {
             throw e;
         }
-        return ResponseEntity.status(HttpStatus.OK).body(professionnal);
+        return ResponseEntity.status(HttpStatus.OK).body(professional);
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Professionnal> read(@PathVariable long id)
+    public ResponseEntity<Professional> read(@PathVariable long id)
     {
-        Professionnal professionnal = null;
+        Professional professionnal = null;
         try {
-            professionnal = professionnalRepository.getById(id);
+            professionnal = professionalRepository.getById(id);
         }catch (Exception e) {
             throw e;
         }
@@ -48,28 +47,28 @@ public class ProfessionnalController
     }
 
     @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Professionnal> update(@PathVariable long id, @RequestBody Professionnal professionnal)
+    public ResponseEntity<Professional> update(@PathVariable long id, @RequestBody Professional professional)
     {
-        Professionnal professionnalUpdated = null;
+        Professional professionalUpdated = null;
         try {
-            professionnalUpdated = professionnalRepository.getById(id);
-            professionnalUpdated.setProfession(professionnal.getProfession());
-            professionnalUpdated.setAgenda(professionnal.getAgenda());
-            professionnalUpdated.setAccount(professionnal.getAccount());
-            professionnalUpdated.setAppointments(professionnal.getAppointments());
-            professionnalUpdated = professionnalRepository.save(professionnalUpdated);
+            professionalUpdated = professionalRepository.getById(id);
+            professionalUpdated.setJob(professional.getJob());
+            professionalUpdated.setAgenda(professional.getAgenda());
+            professionalUpdated.setAccount(professional.getAccount());
+            professionalUpdated.setAppointments(professional.getAppointments());
+            professionalUpdated = professionalRepository.save(professionalUpdated);
         }catch (Exception e) {
             throw e;
         }
-        return ResponseEntity.status(HttpStatus.OK).body(professionnalUpdated);
+        return ResponseEntity.status(HttpStatus.OK).body(professionalUpdated);
     }
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<Professionnal> delete(@PathVariable long id)
+    public ResponseEntity<Professional> delete(@PathVariable long id)
     {
         try {
-            professionnalRepository.deleteById(id);
+            professionalRepository.deleteById(id);
         }catch (Exception e){
             throw e;
         }

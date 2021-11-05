@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
-import fr.istic.m2.taa.subrapays.projectTaa.entity.Professionnal;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AccountRepository;
 
 @RestController
@@ -28,14 +28,14 @@ public class AccountController {
 	public ResponseEntity<Account> create(@PathVariable String login, @PathVariable String mdp,
 			@PathVariable String nom, @PathVariable String prenom,@PathVariable String job) {
 		Account a=new Account();
-		Professionnal p=new Professionnal();
+		Professional p=new Professional();
 		try {
 			a.setLogin(login);
 			a.setPassword(mdp);
 			p.setFirstname(prenom);
 			p.setLastname(nom);
 			p.setJob(job);
-			a.setProfessionnal(p);
+			a.setProfessional(p);
 			accountRepository.save(a);
 		}catch(Exception e){e.printStackTrace();}
 		return ResponseEntity.status(HttpStatus.OK).body(a);

@@ -18,10 +18,16 @@ public class AgendaController {
 	private AppointmentRepository appointmentRepository;
 
 	@Autowired
-	public AgendaController(AgendaRepository agendaRepository) {
+	public void setAgendaRepository(AgendaRepository agendaRepository)
+	{
 		this.agendaRepository = agendaRepository;
 	}
 
+	@Autowired
+	public void setAppointmentRepository(AppointmentRepository appointmentRepository)
+	{
+		this.appointmentRepository = appointmentRepository;
+	}
 
 	@GetMapping(value="/get/{id}")
 	@ResponseBody

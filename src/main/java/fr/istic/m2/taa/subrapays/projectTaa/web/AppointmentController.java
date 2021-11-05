@@ -13,7 +13,7 @@ public class AppointmentController{
     private AppointmentRepository appointmentRepository;
 
     @Autowired
-    public void setAppointmentDao(AppointmentRepository appointmentRepository){
+    public void setAppointmentRepository(AppointmentRepository appointmentRepository){
         this.appointmentRepository = appointmentRepository;
     }
 

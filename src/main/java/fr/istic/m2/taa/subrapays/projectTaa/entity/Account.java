@@ -4,12 +4,11 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "accounts")
 public class Account
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name="login")
@@ -18,8 +17,8 @@ public class Account
     @Column(name="password")
     private String password;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private Professionnal professionnal;
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    private Professional professional;
 
     public Long getId()
     {
@@ -47,11 +46,11 @@ public class Account
         this.password = password;
     }
 
-    public Professionnal getProfessionnal() {
-        return professionnal;
+    public Professional getProfessional() {
+        return professional;
     }
 
-    public void setProfessionnal(Professionnal professionnal) {
-        this.professionnal = professionnal;
+    public void setProfessional(Professional professional) {
+        this.professional = professional;
     }
 }

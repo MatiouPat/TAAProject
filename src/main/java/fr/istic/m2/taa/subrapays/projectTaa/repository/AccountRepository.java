@@ -12,6 +12,6 @@ import javax.transaction.Transactional;
 public interface AccountRepository extends JpaRepository<Account, Long>
 {
 
-	 @Query("select a from Account as a where a.professionnal.firstname=?1 and a.professionnal.lastname=?2")
+	 @Query("select a from Account as a where a.professional.firstname=?1 and a.professional.lastname=?2")
 	 public Account FindAccountByProfessionnal(String firstname, String lastname);
 }

@@ -1,13 +1,12 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 public class Appointment
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int duration;
@@ -20,7 +19,7 @@ public class Appointment
     private User user;
 
     @ManyToOne
-    private Professionnal professionnal;
+    private Professional professionnal;
 
     @ManyToOne
     private Agenda agenda;
@@ -59,11 +58,11 @@ public class Appointment
         this.libre = libre;
     }
 
-    public Professionnal getProfessionnal() {
+    public Professional getProfessionnal() {
         return professionnal;
     }
 
-    public void setProfessionnal(Professionnal professionnal) {
+    public void setProfessionnal(Professional professionnal) {
         this.professionnal = professionnal;
     }
 

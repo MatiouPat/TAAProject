@@ -8,13 +8,13 @@ public class Agenda
 {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String url;
 
-    @OneToOne
-    private Professionnal professionnal;
+    @OneToOne(mappedBy = "agenda", cascade = CascadeType.ALL)
+    private Professional professional;
 
     @OneToMany
     private Collection<Appointment> appointments;
@@ -37,12 +37,12 @@ public class Agenda
         this.url = url;
     }
 
-    public Professionnal getProfessionnal() {
-        return professionnal;
+    public Professional getProfessional() {
+        return professional;
     }
 
-    public void setProfessional(Professionnal professionnal) {
-        this.professionnal = professionnal;
+    public void setProfessional(Professional professional) {
+        this.professional = professional;
     }
 
     public Collection<Appointment> getAppointments() {

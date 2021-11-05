@@ -1,18 +1,14 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-public class Professionnal extends User
+public class Professional extends User
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String profession;
 
     @OneToOne
     private Agenda agenda;
@@ -25,11 +21,6 @@ public class Professionnal extends User
     
     private String job;
 
-    public Long getId()
-    {
-        return id;
-    }
-
     public String getJob() {
 		return job;
 	}
@@ -37,19 +28,6 @@ public class Professionnal extends User
 	public void setJob(String job) {
 		job = job;
 	}
-
-	public void setId(Long id)
-    {
-        this.id = id;
-    }
-
-    public String getProfession() {
-        return profession;
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
-    }
 
     public Agenda getAgenda() {
         return agenda;
