@@ -1,13 +1,20 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public class User
+public class User implements Serializable
 {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

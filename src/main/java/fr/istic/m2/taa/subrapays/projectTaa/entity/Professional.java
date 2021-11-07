@@ -4,13 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-public class Professional extends User
+public class Professional extends User implements Serializable
 {
 
-    @OneToOne
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@OneToOne
     private Agenda agenda;
 
     @OneToOne
@@ -26,7 +33,7 @@ public class Professional extends User
 	}
 
 	public void setJob(String job) {
-		job = job;
+		this.job = job;
 	}
 
     public Agenda getAgenda() {

@@ -1,11 +1,18 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
-public class Appointment
+public class Appointment implements Serializable 
 {
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

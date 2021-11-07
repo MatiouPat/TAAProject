@@ -1,7 +1,11 @@
 package fr.istic.m2.taa.subrapays.projectTaa.web;
 
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
-import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionnalRepository;
+import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class ProfessionalController
 {
 
-    private ProfessionnalRepository professionalRepository;
+    private ProfessionalRepository professionalRepository;
 
     @Autowired
-    public void setProfessionalRepository(ProfessionnalRepository professionalRepository)
+    public void setProfessionalRepository(ProfessionalRepository professionalRepository)
     {
         this.professionalRepository = professionalRepository;
     }
@@ -46,6 +50,21 @@ public class ProfessionalController
         return ResponseEntity.status(HttpStatus.OK).body(professionnal);
     }
 
+    
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<Professional>> getListProfessional()
+    {
+    	List<Professional> l = new ArrayList<Professional>();
+        try {
+            l = professionalRepository.findAll();
+        }catch (Exception e) {
+            throw e;
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(l);
+    }
+
+    
     @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Professional> update(@PathVariable long id, @RequestBody Professional professional)
     {

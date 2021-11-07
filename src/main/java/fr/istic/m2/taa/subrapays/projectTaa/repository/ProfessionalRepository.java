@@ -11,14 +11,11 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface ProfessionnalRepository extends JpaRepository<Professional, Long>
+public interface ProfessionalRepository extends JpaRepository<Professional, Long>
 {
 	
-	@Query("select p from Professional as p where p.firstname=?1")
-	public Professional FindProfessionnalByFirstname(String firstname);
-	
-	@Query("select p from Professional as p where p.lastname=?1")
-	public Professional FindProfessionnalByLastname(String lastname);
+	@Query("select p from Professional as p where p.firstname=?1 and p.lastname=?2")
+	public Professional FindProfessionnalByName(String firstname,String lastname);
 	
 	@Query("select p from Professional as p where p.job=?1")
 	public List<Professional> FindAllProfessionnalByJob(String job);

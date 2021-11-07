@@ -26,6 +26,67 @@ USE `taabdd`;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `professional_appointments`
+--
+
+DROP TABLE IF EXISTS `professional_appointments`;
+CREATE TABLE IF NOT EXISTS `professional_appointments` (
+  `professional_id` bigint NOT NULL,
+  `appointments_id` bigint NOT NULL,
+  UNIQUE KEY `UK_n9wewd6sh6hfgu6hnv6y56pr7` (`appointments_id`),
+  KEY `FK1kqosb9ta6vuegwi6mf47d7ek` (`professional_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+
+--
+-- Structure de la table `appointment`
+--
+
+DROP TABLE IF EXISTS `appointment`;
+CREATE TABLE IF NOT EXISTS `appointment` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `duration` int NOT NULL,
+  `libre` bit(1) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `agenda_id` bigint DEFAULT NULL,
+  `professionnal_id` bigint DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKhulxmy8gvgya4j63rl7hsm23b` (`agenda_id`),
+  KEY `FK2cjvpsakicl79jxsx37kbcgfy` (`professionnal_id`),
+  KEY `FKa8m1smlfsc8kkjn2t6wpdmysk` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `professional`
+--
+
+DROP TABLE IF EXISTS `professional`;
+CREATE TABLE IF NOT EXISTS `professional` (
+  `job` varchar(255) DEFAULT NULL,
+  `id` bigint NOT NULL,
+  `account_id` bigint DEFAULT NULL,
+  `agenda_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKrmhffy3toilmeli8ejsqartco` (`account_id`),
+  KEY `FKmhsjdnp2vudd6pi8xwi4cqy2g` (`agenda_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `professional`
+--
+
+INSERT INTO `professional` (`job`, `id`, `account_id`, `agenda_id`) VALUES
+('Professeur', 1, 1, 1),
+('Responsable de formation', 4, 2, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `account`
 --
 
@@ -82,65 +143,6 @@ CREATE TABLE IF NOT EXISTS `agenda_appointments` (
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `appointment`
---
-
-DROP TABLE IF EXISTS `appointment`;
-CREATE TABLE IF NOT EXISTS `appointment` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `duration` int NOT NULL,
-  `libre` bit(1) NOT NULL,
-  `subject` varchar(255) DEFAULT NULL,
-  `agenda_id` bigint DEFAULT NULL,
-  `professionnal_id` bigint DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKhulxmy8gvgya4j63rl7hsm23b` (`agenda_id`),
-  KEY `FK2cjvpsakicl79jxsx37kbcgfy` (`professionnal_id`),
-  KEY `FKa8m1smlfsc8kkjn2t6wpdmysk` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `professional`
---
-
-DROP TABLE IF EXISTS `professional`;
-CREATE TABLE IF NOT EXISTS `professional` (
-  `job` varchar(255) DEFAULT NULL,
-  `id` bigint NOT NULL,
-  `account_id` bigint DEFAULT NULL,
-  `agenda_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKrmhffy3toilmeli8ejsqartco` (`account_id`),
-  KEY `FKmhsjdnp2vudd6pi8xwi4cqy2g` (`agenda_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `professional`
---
-
-INSERT INTO `professional` (`job`, `id`, `account_id`, `agenda_id`) VALUES
-('Professeur', 1, 1, 1),
-('Responsable de formation', 4, 2, 2);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `professional_appointments`
---
-
-DROP TABLE IF EXISTS `professional_appointments`;
-CREATE TABLE IF NOT EXISTS `professional_appointments` (
-  `professional_id` bigint NOT NULL,
-  `appointments_id` bigint NOT NULL,
-  UNIQUE KEY `UK_n9wewd6sh6hfgu6hnv6y56pr7` (`appointments_id`),
-  KEY `FK1kqosb9ta6vuegwi6mf47d7ek` (`professional_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `user`
