@@ -1,28 +1,24 @@
-package fr.istic.m2.taa.subrapays.projectTaa.entity;
+package fr.istic.m2.taa.subrapays.projectTaa.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.*;
-
-import java.io.Serializable;
 import java.util.Collection;
 
-@Entity
-@Table(name="professional")
-public class Professional extends User
-{
+import javax.validation.constraints.*;
 
-	@OneToOne
-    private Agenda agenda;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Agenda;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Appointment;
 
-    @OneToOne
+public class ProfessionalDto extends UserDto{
+
+	private Agenda agenda;
+
+    @NotNull
     private Account account;
 
-    @OneToMany
     private Collection<Appointment> appointments;
     
+    @NotBlank(message="you must precise you job")
+    @Size(min=3,message="job must be longer than 3 characters")
     private String job;
 
     public String getJob() {
@@ -59,10 +55,8 @@ public class Professional extends User
 
     @Override
     public String toString() {
-        return "Professional{" +
-                "id=" + id +
-                ", firstname=" + this.firstname +
-                ", lastname=" + this.lastname +
+        return "Professional{firstname=" + this.getFirstname() +
+                ", lastname=" + this.getLastname() +
                 ", job=" + job +          
                 '}';
     }

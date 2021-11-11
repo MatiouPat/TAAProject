@@ -52,10 +52,7 @@ public class User implements Serializable
     
     @Override
     public String toString() {
-    	return "User{" +
-                "id=" + id +
-                ", nom=" + firstname +
-                ", prenom=" + lastname;
+    	return "User{id = " + id + ", firstname = " + firstname + ", lastname = " + lastname;
     }
 
 }
