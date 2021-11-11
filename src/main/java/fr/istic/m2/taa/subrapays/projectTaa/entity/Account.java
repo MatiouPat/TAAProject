@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name="account")
 public class Account implements Serializable
 {
 
@@ -59,5 +60,14 @@ public class Account implements Serializable
 
     public void setProfessional(Professional professional) {
         this.professional = professional;
+    }
+    
+    @Override
+    public String toString() {
+    	return "Appointment{" +
+                "id=" + id +
+                ", login=" + login +
+                ", password=" + password +
+                ", job=" + professional.getJob();
     }
 }

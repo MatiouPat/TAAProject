@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@Table(name="appointment")
 public class Appointment implements Serializable 
 {
     /**
@@ -26,7 +27,7 @@ public class Appointment implements Serializable
     private User user;
 
     @ManyToOne
-    private Professional professionnal;
+    private Professional professional;
 
     @ManyToOne
     private Agenda agenda;
@@ -66,11 +67,11 @@ public class Appointment implements Serializable
     }
 
     public Professional getProfessionnal() {
-        return professionnal;
+        return professional;
     }
 
-    public void setProfessionnal(Professional professionnal) {
-        this.professionnal = professionnal;
+    public void setProfessionnal(Professional professional) {
+        this.professional = professional;
     }
 
     public Agenda getAgenda() {
@@ -80,4 +81,16 @@ public class Appointment implements Serializable
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
     }
+
+    @Override
+    public String toString() {
+    	return "Aganda{" +
+                "id=" + id +
+                ", user=" + user.firstname +
+                " " + user.lastname +
+                ", professional=" + professional.firstname +
+                " " + professional.lastname +
+                ", job=" + professional.getJob();
+    }
 }
+

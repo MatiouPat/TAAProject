@@ -1,5 +1,6 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
+@Table(name="professional")
 public class Professional extends User implements Serializable
 {
 
@@ -59,5 +61,16 @@ public class Professional extends User implements Serializable
     public void setAppointments(Collection<Appointment> appointments) {
         this.appointments = appointments;
     }
+
+    @Override
+    public String toString() {
+        return "Professional{" +
+                "id=" + id +
+                ", nom=" + this.firstname +
+                ", prenom=" + this.lastname +
+                ", job=" + job +          
+                '}';
+    }
+
 
 }

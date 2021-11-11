@@ -23,13 +23,21 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `taabdd` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE `taabdd`;
 
+DROP TABLE IF EXISTS `professional_appointments`;
+DROP TABLE IF EXISTS `agenda_appointments`;
+DROP TABLE IF EXISTS `appointment`;
+DROP TABLE IF EXISTS `professional`;
+DROP TABLE IF EXISTS `account`;
+DROP TABLE IF EXISTS `agenda`;
+DROP TABLE IF EXISTS `user`;
+
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `professional_appointments`
 --
 
-DROP TABLE IF EXISTS `professional_appointments`;
 CREATE TABLE IF NOT EXISTS `professional_appointments` (
   `professional_id` bigint NOT NULL,
   `appointments_id` bigint NOT NULL,
@@ -44,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `professional_appointments` (
 -- Structure de la table `appointment`
 --
 
-DROP TABLE IF EXISTS `appointment`;
 CREATE TABLE IF NOT EXISTS `appointment` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `duration` int NOT NULL,
@@ -65,7 +72,6 @@ CREATE TABLE IF NOT EXISTS `appointment` (
 -- Structure de la table `professional`
 --
 
-DROP TABLE IF EXISTS `professional`;
 CREATE TABLE IF NOT EXISTS `professional` (
   `job` varchar(255) DEFAULT NULL,
   `id` bigint NOT NULL,
@@ -90,7 +96,6 @@ INSERT INTO `professional` (`job`, `id`, `account_id`, `agenda_id`) VALUES
 -- Structure de la table `account`
 --
 
-DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `login` varchar(255) DEFAULT NULL,
@@ -112,7 +117,6 @@ INSERT INTO `account` (`id`, `login`, `password`) VALUES
 -- Structure de la table `agenda`
 --
 
-DROP TABLE IF EXISTS `agenda`;
 CREATE TABLE IF NOT EXISTS `agenda` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `url` varchar(255) DEFAULT NULL,
@@ -133,7 +137,6 @@ INSERT INTO `agenda` (`id`, `url`) VALUES
 -- Structure de la table `agenda_appointments`
 --
 
-DROP TABLE IF EXISTS `agenda_appointments`;
 CREATE TABLE IF NOT EXISTS `agenda_appointments` (
   `agenda_id` bigint NOT NULL,
   `appointments_id` bigint NOT NULL,
@@ -148,7 +151,6 @@ CREATE TABLE IF NOT EXISTS `agenda_appointments` (
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) DEFAULT NULL,

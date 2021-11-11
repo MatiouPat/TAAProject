@@ -1,4 +1,4 @@
-	package fr.istic.m2.taa.subrapays.projectTaa.entity;
+package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
 
@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
+@Table(name="agenda")
 public class Agenda implements Serializable
 {
 
@@ -59,4 +60,15 @@ public class Agenda implements Serializable
     public void setAppointments(Collection<Appointment> appointments) {
         this.appointments = appointments;
     }
+    
+    @Override
+    public String toString() {
+    	return "Aganda{" +
+                "id=" + id +
+                ", url=" + url +
+                ", professionnel=" + professional.firstname +
+                " " + professional.lastname +
+                ", job=" + professional.getJob();
+    }
+
 }

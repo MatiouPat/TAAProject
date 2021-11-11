@@ -1,4 +1,4 @@
-package fr.istic.m2.taa.subrapays.projectTaa.web;
+package fr.istic.m2.taa.subrapays.projectTaa.controller;
 
 import fr.istic.m2.taa.subrapays.projectTaa.entity.User;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.UserRepository;
@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,14 +20,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/User")
+@Controller
 public class UserController
 {
 
+	@Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -47,7 +51,7 @@ public class UserController
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<User> read(@PathVariable long id)
+    public ResponseEntity<User> getUserById(@PathVariable long id)
     {
         User professionnal = null;
         try {
@@ -58,18 +62,29 @@ public class UserController
         return ResponseEntity.status(HttpStatus.OK).body(professionnal);
     }
 
-    
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/users",produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<List<User>> getListUser()
+    public ResponseEntity<List<User>> getAllUsers()
     {
-    	List<User> l = new ArrayList<User>();
-        try {
-            l = userRepository.findAll();
-        }catch (Exception e) {
-            throw e;
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(l);
+    	List<User> l = userRepository.findAll();
+    	System.out.println("size="+l.size());
+//    	m.addAttribute("list", l);
+		return new ResponseEntity<List<User>>(l,HttpStatus.OK);
+    }
+
+    @GetMapping(value="/usersTest",produces=MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<User>> getAllUsersTest()
+    {
+    	List<User> l = userRepository.findAll();
+    	System.out.println("size="+l.size());
+//    	m.addAttribute("list", l);
+    	try {
+    		return new ResponseEntity<List<User>>(l,HttpStatus.OK);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+		return new ResponseEntity<List<User>>(l,HttpStatus.OK);
     }
 
     

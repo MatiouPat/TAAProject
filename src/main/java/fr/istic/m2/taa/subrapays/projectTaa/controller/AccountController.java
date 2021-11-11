@@ -1,21 +1,27 @@
-package fr.istic.m2.taa.subrapays.projectTaa.web;
+package fr.istic.m2.taa.subrapays.projectTaa.controller;
+
+import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AccountRepository;
 
-@RestController
+@Controller
 @RequestMapping("/Account")
 public class AccountController {
-
+	
+	@Autowired
 	private AccountRepository accountRepository;
 
+	@Autowired
+	private EntityManager em;
 	
 	@Autowired
 	public AccountController(AccountRepository accountRepository) {

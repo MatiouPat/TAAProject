@@ -6,21 +6,23 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
+@Table(name="user")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class User implements Serializable
 {
-    /**
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long id;
 
-    private String lastname;
+    public String lastname;
 
-    private String firstname;
+    public String firstname;
 
     public Long getId()
     {
@@ -47,4 +49,13 @@ public class User implements Serializable
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
+    
+    @Override
+    public String toString() {
+    	return "User{" +
+                "id=" + id +
+                ", nom=" + firstname +
+                ", prenom=" + lastname;
+    }
+
 }
