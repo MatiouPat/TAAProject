@@ -35,7 +35,7 @@ public class AgendaController {
 	public Agenda getAgenda(@PathVariable String nom, @PathVariable String prenom){
 		Agenda a=new Agenda();
 		try {
-			Collection<Appointment> c=appointmentRepository.FindAllAppointmentByProfessionnal(prenom, nom);
+			Collection<Appointment> c=appointmentRepository.FindAllAppointmentByProfessional(prenom, nom);
 			a.setAppointments(c);
 		}catch (Exception e) {
 			e.printStackTrace();

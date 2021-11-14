@@ -1,5 +1,6 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,6 +34,7 @@ public class Professional extends User
 		this.job = job;
 	}
 
+	@JsonBackReference
     public Agenda getAgenda() {
         return agenda;
     }
@@ -41,6 +43,7 @@ public class Professional extends User
         this.agenda = agenda;
     }
 
+    @JsonBackReference
     public Account getAccount() {
         return account;
     }
@@ -49,6 +52,7 @@ public class Professional extends User
         this.account = account;
     }
 
+    @JsonBackReference
     public Collection<Appointment> getAppointments() {
         return appointments;
     }

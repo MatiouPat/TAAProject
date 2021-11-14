@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 public interface AgendaRepository extends JpaRepository<Agenda, Long>
 {
 	
-	@Query("select a from Appointment as a where a.professionnal.firstname=?1 and a.professionnal.firstname=?2")
+	@Query("select a from Appointment as a where a.professional.firstname=?1 and a.professional.firstname=?2")
 	public Agenda FindAgendaByProfessionnal(String firstname, String lastname);
 	
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 @Table(name="account")
@@ -54,6 +56,7 @@ public class Account implements Serializable
         this.password = password;
     }
 
+    @JsonManagedReference
     public Professional getProfessional() {
         return professional;
     }

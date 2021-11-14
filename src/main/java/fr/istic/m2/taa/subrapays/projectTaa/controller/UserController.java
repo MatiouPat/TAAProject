@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sun.net.httpserver.Headers;
+
 @Controller
 public class UserController
 {
@@ -66,10 +68,11 @@ public class UserController
     @ResponseBody
     public ResponseEntity<List<User>> getAllUsers()
     {
-    	List<User> l = userRepository.findAll();
-    	System.out.println("size="+l.size());
-//    	m.addAttribute("list", l);
-		return new ResponseEntity<List<User>>(l,HttpStatus.OK);
+    	List<User> users = userRepository.findAll();
+    	HttpHeaders h=new HttpHeaders(); 
+    	h.add("Access-Control-Allow-Methods", "POST, GET"); // also added header to allow POST, GET method to be available
+    	h.add("Access-Control-Allow-Origin", "*"); // also added header to allow cross domain request for any domain    	System.out.println("size="+users.size());
+        return ResponseEntity.status(HttpStatus.OK).headers(h).body(users);
     }
 
     @GetMapping(value="/usersTest",produces=MediaType.APPLICATION_JSON_VALUE)
@@ -78,7 +81,6 @@ public class UserController
     {
     	List<User> l = userRepository.findAll();
     	System.out.println("size="+l.size());
-//    	m.addAttribute("list", l);
     	try {
     		return new ResponseEntity<List<User>>(l,HttpStatus.OK);
     	} catch (Exception e) {

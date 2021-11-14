@@ -2,6 +2,8 @@ package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -45,6 +47,7 @@ public class Agenda implements Serializable
         this.url = url;
     }
 
+    @JsonManagedReference
     public Professional getProfessional() {
         return professional;
     }
@@ -53,6 +56,7 @@ public class Agenda implements Serializable
         this.professional = professional;
     }
 
+    @JsonManagedReference
     public Collection<Appointment> getAppointments() {
         return appointments;
     }
