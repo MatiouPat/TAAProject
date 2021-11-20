@@ -51,7 +51,7 @@ public class UserController
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
-    @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<User> getUserById(@PathVariable long id)
     {
@@ -64,33 +64,18 @@ public class UserController
         return ResponseEntity.status(HttpStatus.OK).body(professionnal);
     }
 
-    @GetMapping(value="/users",produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="User/getUsers",produces=MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<List<User>> getAllUsers()
     {
     	List<User> users = userRepository.findAll();
     	HttpHeaders h=new HttpHeaders(); 
-    	h.add("Access-Control-Allow-Methods", "POST, GET"); // also added header to allow POST, GET method to be available
-    	h.add("Access-Control-Allow-Origin", "*"); // also added header to allow cross domain request for any domain    	System.out.println("size="+users.size());
+    	h.add("Access-Control-Allow-Methods", "POST, GET"); 
+    	h.add("Access-Control-Allow-Origin", "*");
         return ResponseEntity.status(HttpStatus.OK).headers(h).body(users);
     }
-
-    @GetMapping(value="/usersTest",produces=MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<List<User>> getAllUsersTest()
-    {
-    	List<User> l = userRepository.findAll();
-    	System.out.println("size="+l.size());
-    	try {
-    		return new ResponseEntity<List<User>>(l,HttpStatus.OK);
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    	}
-		return new ResponseEntity<List<User>>(l,HttpStatus.OK);
-    }
-
     
-    @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> update(@PathVariable long id, @RequestBody User user)
     {
         User UserUpdated = null;
@@ -105,7 +90,7 @@ public class UserController
         return ResponseEntity.status(HttpStatus.OK).body(UserUpdated);
     }
 
-    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<User> delete(@PathVariable long id)
     {

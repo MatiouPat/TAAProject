@@ -1,12 +1,14 @@
 package fr.istic.m2.taa.subrapays.projectTaa.controller;
 
+import fr.istic.m2.taa.subrapays.projectTaa.dto.ProfessionalDto;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
+import fr.istic.m2.taa.subrapays.projectTaa.mapper.ProfessionalMapper;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Professional")
 public class ProfessionalController
 {
 
+	@Autowired
     private ProfessionalRepository professionalRepository;
 
     @Autowired
@@ -26,16 +28,28 @@ public class ProfessionalController
         this.professionalRepository = professionalRepository;
     }
 
-    @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Professional> create(@RequestBody Professional professional)
+    @PostMapping(value="Professional/create",produces = MediaType.APPLICATION_JSON_VALUE)
+    public void create(@RequestBody ProfessionalDto professional)
     {
-        try {
-            professionalRepository.save(professional);
+    	System.out.println("creating new professional");
+    	try {
+            professionalRepository.save(ProfessionalMapper.INSTANCE.professionalDtoToProfessional(professional));
         }catch (Exception e) {
             throw e;
         }
-        return ResponseEntity.status(HttpStatus.OK).body(professional);
+        System.out.println("professional created");
+    }
+
+    @GetMapping(value = "Professional/getProfessionals", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<List<Professional>> getListProfessional()
+    {
+    	List<Professional> l = professionalRepository.findAll();
+    	System.out.println("creating pro list from database");
+    	HttpHeaders h=new HttpHeaders(); 
+    	h.add("Access-Control-Allow-Methods", "POST, GET"); 
+    	h.add("Access-Control-Allow-Origin", "*");
+        return ResponseEntity.status(HttpStatus.OK).headers(h).body(l);
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -52,18 +66,6 @@ public class ProfessionalController
     }
 
     
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<List<Professional>> getListProfessional()
-    {
-    	List<Professional> l = new ArrayList<Professional>();
-        try {
-            l = professionalRepository.findAll();
-        }catch (Exception e) {
-            throw e;
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(l);
-    }
 
     
     @PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

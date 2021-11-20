@@ -12,12 +12,12 @@ export class UserService {
 
   constructor(private http: HttpClient)
   {
-    this.baseUrl = 'http://localhost:8080';
+    this.baseUrl = 'http://localhost:8080/User';
   }
 
   public findAll(): Observable<User[]>
   {
-    return this.http.get<User[]>(this.baseUrl + '/users');
+    return this.http.get<User[]>(this.baseUrl + '/getUsers');
   }
 
 }
