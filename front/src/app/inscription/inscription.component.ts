@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Professional } from '../model/professional';
 import { ProfessionalService } from '../service/professional-service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
 
 
 
@@ -10,42 +11,28 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   templateUrl: './inscription.component.html',
   styleUrls: ['./inscription.component.css']
 })
-export class InscriptionComponent implements OnInit {
+export class InscriptionComponent {
 
-	RegisterForm:FormGroup;
-	
-	
-  constructor(public pS:ProfessionalService,public fb:FormBuilder) { 
-	this.RegisterForm=this.fb.group({
-      "firstname" : [''],
-      "lastname" : [''],
-	  "password" : [''],
-      "job" : ['']
-	})
+	professional:Professional;
+
+
+  constructor(private route: ActivatedRoute, private router: Router, private profesionalService: ProfessionalService)
+  {
+    this.professional = new Professional();
 	}
 
-  ngOnInit(): void {
-	this.RegisterForm=this.fb.group({
-      "firstname" : ['guillaume'],
-      "lastname" : ['subra'],
-	  "password" : ['azerty'],
-      "job" : ['etudiant']
-	})
-	
+  onSubmit()
+  {
+    function gotoProfessionalList() {
+
+    }
+
+    this.profesionalService.addProfessional(this.professional).subscribe(result => gotoProfessionalList());
   }
 
-  create(): void {
-    let professional :Professional = {
-      firstname : this.RegisterForm.get("firstname")?.value,
-      lastname : this.RegisterForm.get("lastname")?.value,
-	  password : this.RegisterForm.get("password")?.value,
-      job : this.RegisterForm.get("job")?.value
-    	}
-
-	console.log(professional.firstname+" "+professional.lastname);
-
-	this.pS.addProfessional(professional);
-
-	}
+  gotoProfessionalList()
+  {
+    this.router.navigate(['Professional/getProfessionals'])
+  }
 
 }

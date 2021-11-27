@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Professional } from '../model/professional';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProfessionalService {
 
   private baseUrl: string;
@@ -22,9 +20,7 @@ export class ProfessionalService {
 
   public addProfessional(p:Professional)
   {
-	console.log("creating professional by p data");
-	console.log(p.firstname+" "+p.lastname);
-    return this.http.post(this.baseUrl + '/create',p);
+    return this.http.post<Professional>(this.baseUrl + '/create', p);
   }
 
 }

@@ -1,23 +1,48 @@
 <div class="card my-5">
   <div class="card-body">
-	<form [formGroup]="RegisterForm" (ngSubmit)="create()">
-		<div class="form-group">
-			<label>Nom</label>
-			<input type="text" class="form-control" formControlName="lastname"/>
-		</div>
-		<div class="form-group">
-			<label>Prenom</label>
-			<input type="text" class="form-control" formControlName="firstname"/>
-		</div>
-		<div class="form-group">
-			<label>Mot de passe</label>
-			<input type="text" class="form-control" formControlName="password"/>
-		</div>
-		<div class="form-group">
-			<label>Job</label>
-			<input type="text" class="form-control" formControlName="job"/>
-		</div>
-		<button type="submit" class="btn btn-primary">soumettre</button>
-	</form>
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <label for="firstname">Prénom</label>
+        <input type="text" [(ngModel)]="professional.firstname"
+               class="form-control"
+               id="firstname"
+               name="firstname"
+               placeholder="Entrer votre prénom"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
+      <div class="form-group">
+        <label for="lastname">Nom</label>
+        <input type="text" [(ngModel)]="professional.lastname"
+               class="form-control"
+               id="lastname"
+               name="lastname"
+               placeholder="Entrer votre nom"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="text" [(ngModel)]="professional.password"
+               class="form-control"
+               id="password"
+               name="password"
+               placeholder="Entrer votre mot de passe"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
+      <div class="form-group">
+        <label for="job">Métier</label>
+        <input type="text" [(ngModel)]="professional.job"
+               class="form-control"
+               id="job"
+               name="job"
+               placeholder="Entrer votre travail"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
+      <button type="submit" [disabled]="!userForm.form.valid"
+              class="btn btn-info">Valider</button>
+    </form>
   </div>
 </div>

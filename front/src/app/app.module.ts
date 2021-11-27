@@ -23,8 +23,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-	ReactiveFormsModule,
-	FormsModule,
+	  ReactiveFormsModule,
+	  FormsModule,
   ],
   providers: [UserService,ProfessionalService],
   bootstrap: [AppComponent]

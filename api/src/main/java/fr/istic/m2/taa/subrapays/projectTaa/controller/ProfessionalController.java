@@ -16,10 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/Professional")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ProfessionalController
 {
 
-	@Autowired
     private ProfessionalRepository professionalRepository;
 
     @Autowired
@@ -28,28 +29,23 @@ public class ProfessionalController
         this.professionalRepository = professionalRepository;
     }
 
-    @PostMapping(value="Professional/create",produces = MediaType.APPLICATION_JSON_VALUE)
-    public void create(@RequestBody ProfessionalDto professional)
+    @PostMapping(value="/create")
+    public void create(@RequestBody Object professional)
     {
-    	System.out.println("creating new professional");
-    	try {
-            professionalRepository.save(ProfessionalMapper.INSTANCE.professionalDtoToProfessional(professional));
+    	System.out.println("creating new professional" + professional);
+    	/*try {
+            professionalRepository.save(professional);
         }catch (Exception e) {
             throw e;
-        }
+        }*/
         System.out.println("professional created");
     }
 
-    @GetMapping(value = "Professional/getProfessionals", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @GetMapping(value = "/getProfessionals", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Professional>> getListProfessional()
     {
     	List<Professional> l = professionalRepository.findAll();
-    	System.out.println("creating pro list from database");
-    	HttpHeaders h=new HttpHeaders(); 
-    	h.add("Access-Control-Allow-Methods", "POST, GET"); 
-    	h.add("Access-Control-Allow-Origin", "*");
-        return ResponseEntity.status(HttpStatus.OK).headers(h).body(l);
+        return ResponseEntity.status(HttpStatus.OK).body(l);
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
