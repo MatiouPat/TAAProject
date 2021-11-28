@@ -28,8 +28,17 @@ public class Agenda implements Serializable
 
     @OneToMany
     private Collection<Appointment> appointments;
+    
+    
 
-    public Long getId()
+    public Agenda(String url, Professional professional, Collection<Appointment> appointments) {
+		super();
+		this.url = url;
+		this.professional = professional;
+		this.appointments = appointments;
+	}
+
+	public Long getId()
     {
         return id;
     }

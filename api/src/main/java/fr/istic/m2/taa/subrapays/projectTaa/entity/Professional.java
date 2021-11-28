@@ -15,6 +15,7 @@ import java.util.Collection;
 public class Professional extends User
 {
 
+
 	@OneToOne
     private Agenda agenda;
 
@@ -26,7 +27,15 @@ public class Professional extends User
     
     private String job;
 
-    public String getJob() {
+    public Professional(String firstname, String lastname, String password, Agenda agenda, Collection<Appointment> appointments, String job) {
+		super();
+		this.agenda = agenda;
+		this.account = new Account(Character.toString(firstname.charAt(0))+lastname, password, this);
+		this.appointments = appointments;
+		this.job = job;
+	}
+
+	public String getJob() {
 		return job;
 	}
 

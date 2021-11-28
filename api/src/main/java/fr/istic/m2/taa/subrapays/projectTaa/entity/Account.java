@@ -12,7 +12,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Account implements Serializable
 {
 
-    /**
+    public Account(String login, String password, Professional professional) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.professional = professional;
+	}
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;

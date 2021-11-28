@@ -14,6 +14,18 @@ public class Appointment implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
+
+	public Appointment(int duration, String subject, boolean libre, User user, Professional professional, Agenda agenda) {
+		super();
+		this.duration = duration;
+		this.subject = subject;
+		this.libre = libre;
+		this.user = user;
+		this.professional = professional;
+		this.agenda = agenda;
+	}
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
