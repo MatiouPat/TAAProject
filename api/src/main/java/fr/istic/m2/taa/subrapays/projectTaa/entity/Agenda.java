@@ -12,11 +12,6 @@ import java.util.Collection;
 public class Agenda implements Serializable
 {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,16 +22,8 @@ public class Agenda implements Serializable
     private Professional professional;
 
     @OneToMany
+    @JsonManagedReference
     private Collection<Appointment> appointments;
-    
-    
-
-    public Agenda(String url, Professional professional, Collection<Appointment> appointments) {
-		super();
-		this.url = url;
-		this.professional = professional;
-		this.appointments = appointments;
-	}
 
 	public Long getId()
     {

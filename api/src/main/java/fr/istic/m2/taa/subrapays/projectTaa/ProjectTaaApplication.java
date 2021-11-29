@@ -1,5 +1,6 @@
 package fr.istic.m2.taa.subrapays.projectTaa;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,11 @@ public class ProjectTaaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectTaaApplication.class, args);
+	}
+
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
 	}
 
 }

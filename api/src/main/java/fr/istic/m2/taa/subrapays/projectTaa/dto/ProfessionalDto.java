@@ -8,8 +8,39 @@ import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Agenda;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Appointment;
 
-public class ProfessionalDto extends UserDto{
+public class ProfessionalDto{
 
+    private String firstname;
+
+    private String lastname;
+
+    private String job;
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    /*
 	private Agenda agenda;
 
     @NotNull
@@ -59,7 +90,7 @@ public class ProfessionalDto extends UserDto{
                 ", lastname=" + this.getLastname() +
                 ", job=" + job +          
                 '}';
-    }
+    }*/
 
 
 }

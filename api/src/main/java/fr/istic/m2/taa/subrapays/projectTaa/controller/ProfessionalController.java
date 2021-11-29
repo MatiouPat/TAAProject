@@ -7,6 +7,7 @@ import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,13 @@ import org.springframework.web.bind.annotation.*;
 public class ProfessionalController
 {
 
+    private final ModelMapper modelMapper;
+
     private ProfessionalRepository professionalRepository;
+
+    public ProfessionalController(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     @Autowired
     public void setProfessionalRepository(ProfessionalRepository professionalRepository)
@@ -30,14 +37,15 @@ public class ProfessionalController
     }
 
     @PostMapping(value="/create")
-    public void create(@RequestBody Object professional)
+    public void create(@RequestBody ProfessionalDto professionalDto)
     {
+        Professional professional = convertToEntity(professionalDto);
     	System.out.println("creating new professional" + professional);
-    	/*try {
+    	try {
             professionalRepository.save(professional);
         }catch (Exception e) {
             throw e;
-        }*/
+        }
         System.out.println("professional created");
     }
 
@@ -45,6 +53,7 @@ public class ProfessionalController
     public ResponseEntity<List<Professional>> getListProfessional()
     {
     	List<Professional> l = professionalRepository.findAll();
+        System.out.println(l);
         return ResponseEntity.status(HttpStatus.OK).body(l);
     }
 
@@ -91,6 +100,11 @@ public class ProfessionalController
             throw e;
         }
         return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    private Professional convertToEntity(ProfessionalDto professionalDto) {
+        Professional professional = modelMapper.map(professionalDto, Professional.class);
+        return professional;
     }
 
 }

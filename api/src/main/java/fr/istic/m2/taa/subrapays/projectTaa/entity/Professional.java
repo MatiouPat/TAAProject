@@ -1,9 +1,6 @@
 package fr.istic.m2.taa.subrapays.projectTaa.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 
@@ -15,7 +12,6 @@ import java.util.Collection;
 public class Professional extends User
 {
 
-
 	@OneToOne
     private Agenda agenda;
 
@@ -23,17 +19,10 @@ public class Professional extends User
     private Account account;
 
     @OneToMany
+    @JsonManagedReference
     private Collection<Appointment> appointments;
     
     private String job;
-
-    public Professional(String firstname, String lastname, String password, Agenda agenda, Collection<Appointment> appointments, String job) {
-		super();
-		this.agenda = agenda;
-		this.account = new Account(Character.toString(firstname.charAt(0))+lastname, password, this);
-		this.appointments = appointments;
-		this.job = job;
-	}
 
 	public String getJob() {
 		return job;

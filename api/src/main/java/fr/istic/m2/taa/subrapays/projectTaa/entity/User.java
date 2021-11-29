@@ -11,20 +11,6 @@ import java.util.Collection;
 public class User implements Serializable
 {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	public User() {
-		super();
-	}
-	public User(String lastname, String firstname) {
-		super();
-		this.lastname = lastname;
-		this.firstname = firstname;
-	}
-
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;

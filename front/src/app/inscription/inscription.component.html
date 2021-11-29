@@ -22,16 +22,6 @@
       </div>
       <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
       <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input type="text" [(ngModel)]="professional.password"
-               class="form-control"
-               id="password"
-               name="password"
-               placeholder="Entrer votre mot de passe"
-               required #name="ngModel">
-      </div>
-      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
-      <div class="form-group">
         <label for="job">Métier</label>
         <input type="text" [(ngModel)]="professional.job"
                class="form-control"
