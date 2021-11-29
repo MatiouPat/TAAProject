@@ -1,38 +1,5 @@
 <div class="card my-5">
   <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
-      <div class="form-group">
-        <label for="firstname">Prénom</label>
-        <input type="text" [(ngModel)]="professional.firstname"
-               class="form-control"
-               id="firstname"
-               name="firstname"
-               placeholder="Entrer votre prénom"
-               required #name="ngModel">
-      </div>
-      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
-      <div class="form-group">
-        <label for="lastname">Nom</label>
-        <input type="text" [(ngModel)]="professional.lastname"
-               class="form-control"
-               id="lastname"
-               name="lastname"
-               placeholder="Entrer votre nom"
-               required #name="ngModel">
-      </div>
-      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
-      <div class="form-group">
-        <label for="job">Métier</label>
-        <input type="text" [(ngModel)]="professional.job"
-               class="form-control"
-               id="job"
-               name="job"
-               placeholder="Entrer votre travail"
-               required #name="ngModel">
-      </div>
-      <div [hidden]="!name.pristine" class="alert alert-danger">Ce champ est obligatoire</div>
-      <button type="submit" [disabled]="!userForm.form.valid"
-              class="btn btn-info">Valider</button>
-    </form>
+
   </div>
 </div>

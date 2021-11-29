@@ -13,26 +13,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class InscriptionComponent {
 
-	professional:Professional;
 
-
-  constructor(private route: ActivatedRoute, private router: Router, private profesionalService: ProfessionalService)
-  {
-    this.professional = new Professional();
-	}
-
-  onSubmit()
-  {
-    function gotoProfessionalList() {
-
-    }
-
-    this.profesionalService.addProfessional(this.professional).subscribe(result => gotoProfessionalList());
-  }
-
-  gotoProfessionalList()
-  {
-    this.router.navigate(['Professional/getProfessionals'])
-  }
 
 }

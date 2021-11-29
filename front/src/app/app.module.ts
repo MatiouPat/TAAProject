@@ -11,13 +11,17 @@ import { ProfessionalService } from './service/professional-service';
 import { UserListComponent } from './user-list/user-list.component';
 import { ProfessionalListComponent } from './professional-list/professional-list.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import {HomeComponent} from "./route/home/home.component";
+import {LoginComponent} from "./route/login/login.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     ProfessionalListComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
