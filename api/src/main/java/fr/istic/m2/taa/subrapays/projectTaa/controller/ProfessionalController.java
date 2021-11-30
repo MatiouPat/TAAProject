@@ -1,8 +1,12 @@
 package fr.istic.m2.taa.subrapays.projectTaa.controller;
 
 import fr.istic.m2.taa.subrapays.projectTaa.dto.ProfessionalDto;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
+import fr.istic.m2.taa.subrapays.projectTaa.entity.Agenda;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 import fr.istic.m2.taa.subrapays.projectTaa.mapper.ProfessionalMapper;
+import fr.istic.m2.taa.subrapays.projectTaa.repository.AccountRepository;
+import fr.istic.m2.taa.subrapays.projectTaa.repository.AgendaRepository;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
 
 import java.util.List;
@@ -26,27 +30,48 @@ public class ProfessionalController
 
     private ProfessionalRepository professionalRepository;
 
+    private AccountRepository accountRepository;
+    
+    private AgendaRepository agendaRepository;
+
     public ProfessionalController(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     @Autowired
-    public void setProfessionalRepository(ProfessionalRepository professionalRepository)
+    public void setProfessionalRepository(ProfessionalRepository professionalRepository,
+    		AccountRepository accountRepository, AgendaRepository agendaRepository)
     {
         this.professionalRepository = professionalRepository;
+        this.accountRepository = accountRepository;
+        this.agendaRepository = agendaRepository;
     }
 
     @PostMapping(value="/create")
     public void create(@RequestBody ProfessionalDto professionalDto)
     {
         Professional professional = convertToEntity(professionalDto);
-    	System.out.println("creating new professional" + professional);
+    	System.out.println("creation du professionnel : " + professional);
+    	Account account=new Account();
+    	account.setLogin(Character.toString(professional.firstname.charAt(0))+professional.lastname);
+    	account.setPassword(professional.getPassword());
+    	account.setProfessional(professional);
+    	System.out.println("creation du compte : " + account);
+    	Agenda agenda=new Agenda();
+    	agenda.setUrl("https://agenda_de_"+professional.lastname);
+    	agenda.setProfessional(professional);
+    	System.out.println("creation de l'agenda : " + agenda);
+    	
     	try {
+            accountRepository.save(account);
+            agendaRepository.save(agenda);
             professionalRepository.save(professional);
         }catch (Exception e) {
             throw e;
         }
-        System.out.println("professional created");
+    	System.out.println("compte cree");
+    	System.out.println("agenda cree");
+    	System.out.println("professionnel cree");
     }
 
     @GetMapping(value = "/getProfessionals", produces = MediaType.APPLICATION_JSON_VALUE)
