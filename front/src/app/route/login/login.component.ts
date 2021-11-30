@@ -10,7 +10,6 @@ import {ProfessionalService} from "../../service/professional-service";
 })
 export class LoginComponent implements OnInit {
 
-  account = {username: '', password: ''}
   professional:Professional;
 
   constructor(private route: ActivatedRoute, private router: Router, private profesionalService: ProfessionalService)
