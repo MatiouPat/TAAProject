@@ -24,6 +24,16 @@ public class Professional extends User
     
     private String job;
 
+    private String password;
+    
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getJob() {
 		return job;
 	}
