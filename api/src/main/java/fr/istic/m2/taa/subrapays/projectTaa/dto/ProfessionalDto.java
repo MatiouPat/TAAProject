@@ -1,30 +1,27 @@
 package fr.istic.m2.taa.subrapays.projectTaa.dto;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.validation.constraints.*;
 
-import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
-import fr.istic.m2.taa.subrapays.projectTaa.entity.Agenda;
-import fr.istic.m2.taa.subrapays.projectTaa.entity.Appointment;
-
-public class ProfessionalDto{
+public class ProfessionalDto {
 
     private String firstname;
 
     private String lastname;
 
+    @NotBlank(message="you must precise you job")
+    @Size(min=3,message="job must be longer than 3 characters")
     private String job;
-    
+
+    private String login;
+
     private String password;
 
-    public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public String getFirstname() {
         return firstname;
@@ -50,48 +47,20 @@ public class ProfessionalDto{
         this.job = job;
     }
 
-    /*
-	private Agenda agenda;
-
-    @NotNull
-    private Account account;
-
-    private Collection<Appointment> appointments;
-    
-    @NotBlank(message="you must precise you job")
-    @Size(min=3,message="job must be longer than 3 characters")
-    private String job;
-
-    public String getJob() {
-		return job;
-	}
-
-	public void setJob(String job) {
-		this.job = job;
-	}
-
-    public Agenda getAgenda() {
-        return agenda;
+    public String getLogin() {
+        return login;
     }
 
-    public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public Collection<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(Collection<Appointment> appointments) {
-        this.appointments = appointments;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -100,7 +69,7 @@ public class ProfessionalDto{
                 ", lastname=" + this.getLastname() +
                 ", job=" + job +          
                 '}';
-    }*/
+    }
 
 
 }

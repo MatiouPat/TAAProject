@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, InjectionToken} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
@@ -7,6 +7,7 @@ import { User } from '../model/user';
   providedIn: 'root'
 })
 export class UserService {
+
 
   private baseUrl: string;
 

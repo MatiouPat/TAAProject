@@ -1,6 +1,4 @@
-import {User} from "./user";
-
-export class Professional extends User{
+export class Account{
   job:string;
   login:string;
   password:string;

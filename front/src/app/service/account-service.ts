@@ -3,15 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Professional } from '../model/professional';
+import {Account} from "../model/account";
 
 @Injectable()
-export class ProfessionalService {
+export class AccountService {
 
   private baseUrl: string;
 
   constructor(private http: HttpClient)
   {
-    this.baseUrl = 'http://localhost:8080/professional';
+    this.baseUrl = 'http://localhost:8080/account';
   }
 
   public findAll(): Observable<Professional[]>
@@ -19,18 +20,10 @@ export class ProfessionalService {
     return this.http.get<Professional[]>(this.baseUrl + '/getProfessionals');
   }
 
-  public register(p:Professional):Observable<any>
+  public login(a:Account):Observable<any>
   {
-    return this.http.post<Professional>(this.baseUrl + '/create', p)
-      .pipe(
-        map(res => {
-          return res;
-        }),
-        catchError(error => {
-          //return of(error);
-          return throwError(error);
-        })
-      );
+    console.log(a);
+    return this.http.post<Professional>(this.baseUrl + '/login', a)
   }
 
 }

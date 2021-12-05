@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 import fr.istic.m2.taa.subrapays.projectTaa.dto.ProfessionalDto;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ProfessionalMapper {
 	
 	ProfessionalMapper INSTANCE=Mappers.getMapper(ProfessionalMapper.class);

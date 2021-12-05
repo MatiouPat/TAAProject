@@ -19,7 +19,6 @@ import com.sun.net.httpserver.Headers;
 
 @Controller
 @RequestMapping("/User")
-@CrossOrigin(origins = "http://localhost:4200")
 public class UserController
 {
 

@@ -5,6 +5,7 @@ import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Agenda;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 import fr.istic.m2.taa.subrapays.projectTaa.mapper.ProfessionalMapper;
+import fr.istic.m2.taa.subrapays.projectTaa.mapper.impl.ProfessionalMapperImpl;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AccountRepository;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.AgendaRepository;
 import fr.istic.m2.taa.subrapays.projectTaa.repository.ProfessionalRepository;
@@ -21,12 +22,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Professional")
-@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/professional")
 public class ProfessionalController
 {
 
-    private final ModelMapper modelMapper;
+    private final ProfessionalMapper mapper;
 
     private ProfessionalRepository professionalRepository;
 
@@ -34,8 +34,8 @@ public class ProfessionalController
     
     private AgendaRepository agendaRepository;
 
-    public ProfessionalController(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public ProfessionalController(ProfessionalMapper mapper) {
+        this.mapper = mapper;
     }
 
     @Autowired
@@ -50,28 +50,11 @@ public class ProfessionalController
     @PostMapping(value="/create")
     public void create(@RequestBody ProfessionalDto professionalDto)
     {
-        Professional professional = convertToEntity(professionalDto);
+        Professional professional = this.mapper.professionalDtoToProfessional(professionalDto);
     	System.out.println("creation du professionnel : " + professional);
-    	Account account=new Account();
-    	account.setLogin(Character.toString(professional.firstname.charAt(0))+professional.lastname);
-    	account.setPassword(professional.getPassword());
-    	account.setProfessional(professional);
-    	System.out.println("creation du compte : " + account);
-    	Agenda agenda=new Agenda();
-    	agenda.setUrl("https://agenda_de_"+professional.lastname);
-    	agenda.setProfessional(professional);
-    	System.out.println("creation de l'agenda : " + agenda);
-    	
-    	try {
-            accountRepository.save(account);
-            agendaRepository.save(agenda);
-            professionalRepository.save(professional);
-        }catch (Exception e) {
-            throw e;
-        }
-    	System.out.println("compte cree");
-    	System.out.println("agenda cree");
-    	System.out.println("professionnel cree");
+        System.out.println(professional.getAccount());
+        accountRepository.save(professional.getAccount());
+        professionalRepository.save(professional);
     }
 
     @GetMapping(value = "/getProfessionals", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -125,11 +108,6 @@ public class ProfessionalController
             throw e;
         }
         return ResponseEntity.status(HttpStatus.OK).body(null);
-    }
-
-    private Professional convertToEntity(ProfessionalDto professionalDto) {
-        Professional professional = modelMapper.map(professionalDto, Professional.class);
-        return professional;
     }
 
 }

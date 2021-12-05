@@ -8,17 +8,17 @@ import fr.istic.m2.taa.subrapays.projectTaa.entity.Professional;
 
 public class AccountDto implements Serializable{
 
-	@NotBlank(message="login cannot be empty")
+    @NotBlank(message="login cannot be empty")
     private String login;
 
 	@NotBlank(message="password cannot be empty")
 	@Size(min=3,message="password must be longer than 3 characters")
     private String password;
 
-    @NotNull
-	private Professional professional;
+    public String getLogin() {
+        return login;
+    }
 
-    
     public void setLogin(String login) {
         this.login = login;
     }
@@ -30,19 +30,10 @@ public class AccountDto implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Professional getProfessional() {
-        return professional;
-    }
-
-    public void setProfessional(Professional professional) {
-        this.professional = professional;
-    }
     
     @Override
     public String toString() {
     	return "Appointment{login=" + login +
-                ", password=" + password +
-                ", job=" + professional.getJob();
+                ", password=" + password;
     }
 }

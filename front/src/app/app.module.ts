@@ -13,6 +13,7 @@ import { ProfessionalListComponent } from './professional-list/professional-list
 import { InscriptionComponent } from './inscription/inscription.component';
 import {HomeComponent} from "./route/home/home.component";
 import {LoginComponent} from "./route/login/login.component";
+import {AccountService} from "./service/account-service";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import {LoginComponent} from "./route/login/login.component";
 	  ReactiveFormsModule,
 	  FormsModule,
   ],
-  providers: [UserService,ProfessionalService],
+  providers: [UserService,ProfessionalService, AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

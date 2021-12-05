@@ -5,14 +5,27 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Connexion</h5>
-          <form role="form" (submit)="login()">
+          <form role="form" (submit)="login()" #loginForm="ngForm">
             <div class="form-group">
-              <label for="username">Nom d'utilisateur:</label> <input type="text" class="form-control" id="username" name="username" [(ngModel)]="account.username"/>
+              <label for="firstname">Nom d'utilisateur</label>
+              <input type="text" [(ngModel)]="account.login"
+                     class="form-control"
+                     id="username"
+                     name="username"
+                     placeholder="Entrer votre nom d'utilisateur"
+                     required #name="ngModel">
             </div>
-            <div>
-              <label for="password">Mot de passe:</label> <input type="password" class="form-control" id="password" name="password" [(ngModel)]="account.password"/>
+            <div class="form-group">
+              <label for="firstname">Mot de passe</label>
+              <input type="text" [(ngModel)]="account.password"
+                     class="form-control"
+                     id="password"
+                     name="password"
+                     placeholder="Entrer votre mot de passe"
+                     required #name="ngModel">
             </div>
-            <button type="submit" class="btn btn-primary">Envoyer</button>
+            <button type="submit" [disabled]="!loginForm.form.valid"
+                          class="btn btn-primary">Se connecter</button>
           </form>
         </div>
       </div>
@@ -21,7 +34,25 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Inscription</h5>
-          <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+          <form (ngSubmit)="register()" #registerForm="ngForm">
+            <div class="form-group">
+              <label for="firstname">Nom d'utilisateur</label>
+              <input type="text" [(ngModel)]="professional.login"
+                     class="form-control"
+                     id="login"
+                     name="login"
+                     placeholder="Entrer votre nom d'utilisateur"
+                     required #name="ngModel">
+            </div>
+            <div class="form-group">
+              <label for="firstname">Mot de passe</label>
+              <input type="text" [(ngModel)]="professional.password"
+                     class="form-control"
+                     id="new_password"
+                     name="new_password"
+                     placeholder="Entrer votre mot de passe"
+                     required #name="ngModel">
+            </div>
             <div class="form-group">
               <label for="firstname">Prénom</label>
               <input type="text" [(ngModel)]="professional.firstname"
@@ -49,7 +80,7 @@
                      placeholder="Entrer votre travail"
                      required #name="ngModel">
             </div>
-            <button type="submit" [disabled]="!userForm.form.valid"
+            <button type="submit" [disabled]="!registerForm.form.valid"
                     class="btn btn-primary">Créer un compte</button>
           </form>
         </div>

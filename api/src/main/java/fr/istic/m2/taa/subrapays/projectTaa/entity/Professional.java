@@ -19,20 +19,9 @@ public class Professional extends User
     private Account account;
 
     @OneToMany
-    @JsonManagedReference
     private Collection<Appointment> appointments;
     
     private String job;
-
-    private String password;
-    
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public String getJob() {
 		return job;
@@ -60,7 +49,7 @@ public class Professional extends User
         this.account = account;
     }
 
-    @JsonBackReference
+    @JsonManagedReference
     public Collection<Appointment> getAppointments() {
         return appointments;
     }

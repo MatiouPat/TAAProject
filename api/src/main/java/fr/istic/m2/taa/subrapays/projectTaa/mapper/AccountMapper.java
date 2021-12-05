@@ -6,7 +6,7 @@ import org.mapstruct.factory.Mappers;
 import fr.istic.m2.taa.subrapays.projectTaa.dto.AccountDto;
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AccountMapper {
 	
 	AccountMapper INSTANCE=Mappers.getMapper(AccountMapper.class);

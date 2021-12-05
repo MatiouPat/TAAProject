@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Professional} from "../../model/professional";
-import {Account} from "../../model/account";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ProfessionalService} from "../../service/professional-service";
 import {AccountService} from "../../service/account-service";
+import {Account} from "../../model/account";
+import {Professional} from "../../model/professional";
+import {ProfessionalService} from "../../service/professional-service";
 
 @Component({
   selector: 'app-login',
@@ -12,41 +12,37 @@ import {AccountService} from "../../service/account-service";
 })
 export class LoginComponent implements OnInit {
 
-  professional:Professional;
   account:Account;
+  professional:Professional;
 
-  constructor(private route: ActivatedRoute, private router: Router, 
-	private professionalService: ProfessionalService, private accountService: AccountService)
+
+  constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private professionalService: ProfessionalService)
   {
-    this.professional = new Professional();
-	this.account = new Account();
+    this.account = new Account();
+    this.professional = new Professional()
   }
-
-
 
   ngOnInit(): void {
   }
 
-  login()
+  login():void
   {
+    this.accountService.login(this.account).subscribe(
+      result => {
+        if (result.responseCode != "OK") {
 
+        } else {
+          this.router.navigateByUrl('/home');
+        }
+      })
   }
 
-  onSubmit()
+  register():void
   {
-    function gotoProfessionalList() {
-		
-    }
-	
-	console.log(this.professional);
-    this.professionalService.addProfessional(this.professional).subscribe(result => gotoProfessionalList());
-
-  }
-
-
-  gotoProfessionalList()
-  {
-    this.router.navigate(['Professional/getProfessionals'])
+    this.professionalService.register(this.professional).subscribe(
+      result => {
+        console.log(result);
+      })
   }
 
 }

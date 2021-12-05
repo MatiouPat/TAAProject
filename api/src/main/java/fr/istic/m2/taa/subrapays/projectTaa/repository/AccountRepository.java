@@ -14,4 +14,6 @@ public interface AccountRepository extends JpaRepository<Account, Long>
 
 	 @Query("select a from Account as a where a.professional.firstname=?1 and a.professional.lastname=?2")
 	 public Account FindAccountByProfessionnal(String firstname, String lastname);
+
+	 public Account findAccountByLogin(String login);
 }
