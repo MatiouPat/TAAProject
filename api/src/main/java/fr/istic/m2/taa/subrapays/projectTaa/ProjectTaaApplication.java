@@ -14,9 +14,4 @@ public class ProjectTaaApplication {
 		SpringApplication.run(ProjectTaaApplication.class, args);
 	}
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
-
 }

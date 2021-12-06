@@ -86,7 +86,7 @@ public class Appointment implements Serializable
 
     @Override
     public String toString() {
-    	return "Aganda{" +
+    	return "Appointment{" +
                 "id=" + id +
                 ", user=" + user.firstname +
                 " " + user.lastname +

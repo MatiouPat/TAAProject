@@ -1,6 +1,9 @@
 package fr.istic.m2.taa.subrapays.projectTaa.service.account.impl;
 
 import fr.istic.m2.taa.subrapays.projectTaa.entity.Account;
+import fr.istic.m2.taa.subrapays.projectTaa.dto.AccountDto;
+import fr.istic.m2.taa.subrapays.projectTaa.mapper.AccountMapper;
+import fr.istic.m2.taa.subrapays.projectTaa.mapper.impl.AccountMapperImpl;
 import fr.istic.m2.taa.subrapays.projectTaa.service.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,9 @@ import java.util.logging.Logger;
 public class AccountServiceImpl implements AccountService
 {
 
+    @Autowired
+    AccountMapperImpl accountMapper;
+
     private static final Logger LOGGER = Logger.getLogger(AccountServiceImpl.class.getName());
 
     AuthenticationManager authenticationManager;
@@ -37,9 +43,10 @@ public class AccountServiceImpl implements AccountService
             SecurityContext securityContext = SecurityContextHolder.getContext();
             securityContext.setAuthentication(authentication);
             Account account = (Account) authentication.getPrincipal();
-            LOGGER.info("Logged with account: {" + account + "}");
+            LOGGER.info("Logged with account: {" + authenticationToken.getCredentials() + "}");
+            AccountDto accountDto = accountMapper.accountToDto(account);
 
-            return new ServiceResponse(HttpStatus.OK, MsgServiceResponse.NO_USER_WITH_USERNAME);
+            return new ServiceResponse(HttpStatus.OK, MsgServiceResponse.OK, accountDto);
         } catch (BadCredentialsException ex) {
             return new ServiceResponse(HttpStatus.BAD_REQUEST, MsgServiceResponse.NO_USER_WITH_USERNAME);
         }

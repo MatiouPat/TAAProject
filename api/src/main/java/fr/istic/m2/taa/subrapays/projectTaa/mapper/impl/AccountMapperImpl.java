@@ -12,7 +12,10 @@ public class AccountMapperImpl implements AccountMapper
 
     @Override
     public AccountDto accountToDto(Account a) {
-        return null;
+        AccountDto accountDto = new AccountDto();
+        accountDto.setLogin(a.getLogin());
+        accountDto.setPassword(a.getPassword());
+        return accountDto;
     }
 
     @Override

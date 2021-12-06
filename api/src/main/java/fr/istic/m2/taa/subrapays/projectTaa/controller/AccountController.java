@@ -36,6 +36,7 @@ public class AccountController {
 	}
 
 	@PostMapping(value="/login")
+	@ResponseBody
 	public ServiceResponse login(@RequestBody AccountDto accountDto)
 	{
 		Account account = mapper.dtoToAccount(accountDto);

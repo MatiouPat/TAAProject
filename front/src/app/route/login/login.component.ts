@@ -4,6 +4,7 @@ import {AccountService} from "../../service/account-service";
 import {Account} from "../../model/account";
 import {Professional} from "../../model/professional";
 import {ProfessionalService} from "../../service/professional-service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   account:Account;
   professional:Professional;
-
+  returnUrl: string | undefined;
 
   constructor(private route: ActivatedRoute, private router: Router, private accountService: AccountService, private professionalService: ProfessionalService)
   {
@@ -23,25 +24,24 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   login():void
   {
-    this.accountService.login(this.account).subscribe(
-      result => {
-        if (result.responseCode != "OK") {
-
-        } else {
-          this.router.navigateByUrl('/home');
-        }
-      })
+    this.accountService.login(this.account)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        });
   }
 
   register():void
   {
     this.professionalService.register(this.professional).subscribe(
       result => {
-        console.log(result);
+        console.log(localStorage.getItem('currentUser'));
       })
   }
 
